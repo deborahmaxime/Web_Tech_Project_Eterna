@@ -36,10 +36,20 @@ if ($_SERVER['HTTP_HOST'] === 'localhost' || strpos($_SERVER['HTTP_HOST'], '127.
     $webPath = '/~kevin.bigirimana/Web_Tech_Project_Eterna/uploads/capsules/' . $capsuleId . '/';
 }
 
+error_log("Upload directory: $uploadDir");
+error_log("Parent directory writable: " . (is_writable(__DIR__ . '/../uploads/capsules/') ? 'yes' : 'no'));
+
 // Create upload directory if it doesn't exist
 if (!is_dir($uploadDir)) {
-    if (!mkdir($uploadDir, 0755, true)) {
-        error_log("Failed to create directory: $uploadDir - " . error_get_last()['message']);
+    $oldumask = umask(0);
+    $result = @mkdir($uploadDir, 0777, true);
+    umask($oldumask);
+    
+    if (!$result) {
+        $error = error_get_last();
+        error_log("Failed to create directory: $uploadDir - Error: " . ($error['message'] ?? 'unknown'));
+        error_log("Parent exists: " . (is_dir(__DIR__ . '/../uploads/capsules/') ? 'yes' : 'no'));
+        error_log("Parent writable: " . (is_writable(__DIR__ . '/../uploads/capsules/') ? 'yes' : 'no'));
         echo json_encode(['success' => false, 'message' => 'Failed to create upload directory. Please check server permissions.']);
         exit;
     }
