@@ -676,9 +676,9 @@ function createMemoryCard(capsule) {
     // Get the last media item (most recently uploaded)
     const lastMedia = capsule.media[capsule.media.length - 1];
     
-    // Fix the file path if it doesn't start with ../
+    // Fix the file path if it doesn't start with ../ or /
     let mediaPath = lastMedia.file_path;
-    if (!mediaPath.startsWith('../') && !mediaPath.startsWith('http')) {
+    if (!mediaPath.startsWith('../') && !mediaPath.startsWith('http') && !mediaPath.startsWith('/')) {
       mediaPath = '../' + mediaPath;
     }
     
@@ -901,8 +901,8 @@ async function openEditModal(capsuleId) {
                     if (displayPath.startsWith('uploads/')) {
                       displayPath = '../' + displayPath;
                     }
-                    // If path already has '../uploads/', use as is
-                    else if (!displayPath.startsWith('../')) {
+                    // If path already has '../uploads/' or is absolute path starting with '/', use as is
+                    else if (!displayPath.startsWith('../') && !displayPath.startsWith('/')) {
                       displayPath = '../' + displayPath;
                     }
                     
@@ -1552,7 +1552,7 @@ async function loadLatestMemory() {
       if (latestCapsule.media && latestCapsule.media.length > 0) {
         const lastMedia = latestCapsule.media[latestCapsule.media.length - 1];
         let mediaPath = lastMedia.file_path;
-        if (!mediaPath.startsWith('../') && !mediaPath.startsWith('http')) {
+        if (!mediaPath.startsWith('../') && !mediaPath.startsWith('http') && !mediaPath.startsWith('/')) {
           mediaPath = '../' + mediaPath;
         }
         
@@ -2038,7 +2038,7 @@ function createCapsuleDetailModal(capsule) {
                 let displayPath = media.file_path;
                 if (displayPath.startsWith('uploads/')) {
                   displayPath = '../' + displayPath;
-                } else if (!displayPath.startsWith('../')) {
+                } else if (!displayPath.startsWith('../') && !displayPath.startsWith('/')) {
                   displayPath = '../' + displayPath;
                 }
                 
