@@ -2,6 +2,11 @@
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 
+// Disable HTML error output to prevent breaking JSON responses
+error_reporting(E_ALL);
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+
 include_once "database.php";
 
 $input = json_decode(file_get_contents('php://input'), true);
