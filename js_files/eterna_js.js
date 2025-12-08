@@ -242,7 +242,12 @@ function handleLogout() {
 }
 
 function getCurrentUser() {
-  return JSON.parse(localStorage.getItem('eternaCurrentUser') || 'null');
+  try {
+    return JSON.parse(localStorage.getItem('eternaCurrentUser') || 'null');
+  } catch (error) {
+    console.warn('localStorage access blocked:', error);
+    return null;
+  }
 }
 
 function updateNavForLoggedInUser(user) {
