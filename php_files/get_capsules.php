@@ -2,6 +2,11 @@
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 
+// Disable HTML error output
+error_reporting(E_ALL);
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+
 include_once "database.php";
 
 $userId = $_GET['user_id'] ?? '';
@@ -11,25 +16,34 @@ if (empty($userId)) {
     exit;
 }
 
-$stmt = $conn->prepare("
-    SELECT 
-        capsule_id, 
-        title, 
-        description, 
-        story_text, 
-        date_of_memory, 
-        location_name, 
-        capsule_type, 
-        created_at,
-        open_date,
-        status
-    FROM capsules 
-    WHERE user_id = ? AND is_deleted = FALSE
-    ORDER BY created_at DESC
-");
-$stmt->bind_param("i", $userId);
-$stmt->execute();
-$result = $stmt->get_result();
+try {
+    $stmt = $conn->prepare("
+        SELECT 
+            capsule_id, 
+            title, 
+            description, 
+            story_text, 
+            date_of_memory, 
+            location_name, 
+            capsule_type, 
+            open_date,
+            status
+        FROM capsules 
+        WHERE user_id = ? AND is_deleted = FALSE
+        ORDER BY open_date DESC
+    ");
+    
+    if (!$stmt) {
+        throw new Exception('Prepare failed: ' . $conn->error);
+    }
+    
+    $stmt->bind_param("i", $userId);
+    
+    if (!$stmt->execute()) {
+        throw new Exception('Execute failed: ' . $stmt->error);
+    }
+    
+    $result = $stmt->get_result();
 
 $capsules = [];
 while ($row = $result->fetch_assoc()) {
@@ -57,6 +71,15 @@ echo json_encode([
     'success' => true,
     'capsules' => $capsules
 ]);
+
+} catch (Exception $e) {
+    error_log("Get capsules error: " . $e->getMessage());
+    echo json_encode([
+        'success' => false, 
+        'message' => 'Failed to fetch capsules: ' . $e->getMessage(),
+        'capsules' => []
+    ]);
+}
 
 $conn->close();
 ?>
