@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ETERNA — Where moments last forever.</title>
+  <link rel="icon" type="image/png" href="../Media/ETERNA2-removebg-preview.png">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css_files/eterna_.css">
+  
+  <!-- 👇 ADD SWEETALERT2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+  <nav id="mainNav">
+    <div class="logo">ETERNA</div>
+    <div class="nav-links">
+      <a href="home.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <!--<a href="dashboard.html" class="nav-link">Dashboard</a>-->
+      <a href="Team.html" class="nav-link">Our Team</a>
+      <a href="help.html" class="nav-link">Help</a>
+    </div>
+    <div class="nav-auth">
+      <a href="login.html"><i class="fas fa-sign-in-alt"></i> Log in</a>
+      <a href="signup.html"><i class="fas fa-user-plus"></i> Sign up</a>
+    </div>
+  </nav>
+
+  <!-- Create Memory Page -->
+  <section id="create" class="page active">
+    <div class="page-content">
+      <div class="illustration">✍️</div>
+      <h1>Create a New Memory</h1>
+      <p>Preserve a moment that matters</p>
+      
+      <div class="card form-card">
+        <form id="createMemoryForm" onsubmit="handleCreateMemory(event)">
+          <div class="form-group">
+            <label for="memTitle"><i class="fas fa-bookmark"></i> Title</label>
+            <input type="text" id="memTitle" placeholder="e.g., Our Wedding Day" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="memDate"><i class="fas fa-calendar"></i> Date</label>
+            <input type="date" id="memDate" required>
+          </div>
+
+          <div class="form-group">
+            <label for="memLocation"><i class="fas fa-map-marker-alt"></i> Location</label>
+            <input type="text" id="memLocation" placeholder="e.g., Paris, France">
+          </div>
+          
+          <div class="form-group">
+            <label for="memText"><i class="fas fa-book"></i> Your Story</label>
+            <textarea id="memText" placeholder="Write what you felt, saw, heard..." required></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="memMedia"><i class="fas fa-camera"></i> Add Media</label>
+            <input type="file" id="memMedia" accept="image/*,video/*,audio/*" multiple onchange="previewMedia(event)">
+            <small>Supports photos, videos, and voice notes</small>
+            
+            <!-- 👇 MEDIA PREVIEW AREA -->
+            <div id="mediaPreview" style="margin-top: 1rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem;"></div>
+          </div>
+          
+          <div class="form-group">
+            <label for="memPrivacy"><i class="fas fa-shield-alt"></i> Privacy</label>
+            <select id="memPrivacy" onchange="toggleFutureDatePicker()">
+              <option value="private">Private</option>
+              <option value="shared">Shared with collaborators</option>
+              <option value="future">Future message (set unlock date)</option>
+            </select>
+          </div>
+          
+          <!-- Future Message Unlock Date/Time -->
+          <div class="form-group" id="futureDateGroup" style="display: none;">
+            <label for="unlockDateTime"><i class="fas fa-clock"></i> Unlock Date & Time</label>
+            <input type="datetime-local" id="unlockDateTime" placeholder="When should this be unlocked?">
+            <small style="color: #666;">This capsule will be locked until the selected date and time</small>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-save"></i> Save Memory
+            </button>
+            <button type="button" class="btn btn-outline" onclick="window.location.href='dashboard.html'">
+              <i class="fas fa-times"></i> Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>ETERNA — Where moments last forever.</p>
+    <div class="footer-links">
+      <a href="about.html">About</a>
+      <a href="Team.html">Our Team</a>
+      <a href="help.html">Help</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+    </div>
+  </footer>
+
+  <script src="../js_files/eterna_js.js"></script>
+</body>
+</html>

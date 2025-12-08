@@ -1,0 +1,41 @@
+# Ignore uploaded files
+uploads/capsules/*
+uploads/profiles/*
+!uploads/capsules/.gitkeep
+!uploads/profiles/.gitkeep
+
+# Ignore environment configuration (real credentials)
+env/connect.env
+# But keep the template
+!env/connect.env.example
+
+# Ignore log files
+*.log
+error.log
+access.log
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Ignore editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Ignore temporary files
+*.tmp
+*_backup.*
+*_old.*
+
+# Ignore cache
+cache/
+temp/
+
+# Keep database schema but ignore dumps
+# eternaDb_.sql is kept for deployment
+*.sql.gz
+backup_*.sql

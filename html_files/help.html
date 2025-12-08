@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - ETERNA</title>
+  <link rel="icon" type="image/png" href="../Media/ETERNA2-removebg-preview.png">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --beige: #f8f4ed;
+      --deep-blue: #1c2a3a;
+      --gold: #d4af37;
+      --light-gold: #f0e6c8;
+      --purple: #9087c4;
+      --green: #10b981;
+      --pink: #ec4899;
+      --orange: #f59e0b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f8f4ed 0%, #e8e4f0 100%);
+      color: var(--deep-blue);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    /* Animated Background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(144, 135, 196, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+      animation: bgFloat 20s ease-in-out infinite;
+    }
+
+    @keyframes bgFloat {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 0.8; }
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1.1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      z-index: 1000;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      font-family: 'Lora', serif;
+      font-weight: 600;
+      font-size: 1.8rem;
+      color: var(--gold);
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a {
+      color: var(--deep-blue);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      background: var(--light-gold);
+      color: var(--gold);
+    }
+
+    /* Container */
+    .contact-container {
+      max-width: 1200px;
+      margin: 100px auto 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header */
+    .contact-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      animation: fadeInDown 0.8s ease;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .contact-header h1 {
+      font-family: 'Lora', serif;
+      font-size: 3rem;
+      color: var(--deep-blue);
+      margin-bottom: 1rem;
+    }
+
+    .contact-header p {
+      font-size: 1.2rem;
+      color: #666;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Interactive Message */
+    .interactive-message {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      margin-bottom: 3rem;
+      animation: fadeInUp 0.6s ease;
+      border-left: 5px solid var(--gold);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .interactive-message p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      color: #555;
+    }
+
+    .message-bubbles {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .message-bubble {
+      background: var(--light-gold);
+      color: var(--deep-blue);
+      padding: 0.8rem 1.5rem;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      font-weight: 500;
+    }
+
+    .message-bubble:hover {
+      background: var(--gold);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+    }
+
+    /* Contact Content */
+    .contact-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    /* Contact Form */
+    .contact-form {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      animation: fadeInLeft 0.8s ease;
+    }
+
+    @keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .contact-form h2 {
+      font-family: 'Lora', serif;
+      font-size: 2rem;
+      color: var(--deep-blue);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .contact-form h2 i {
+      color: var(--gold);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--deep-blue);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold), #c9a641);
+      color: var(--deep-blue);
+      border: none;
+      padding: 1.2rem;
+      border-radius: 10px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+    }
+
+    .submit-btn:hover {
+      background: linear-gradient(135deg, #c9a641, var(--gold));
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+    }
+
+    /* Contact Info */
+    .contact-info {
+      animation: fadeInRight 0.8s ease;
+    }
+
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .info-card {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+    }
+
+    .info-card h3 {
+      font-family: 'Lora', serif;
+      font-size: 1.5rem;
+      color: var(--deep-blue);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .info-card h3 i {
+      color: var(--gold);
+    }
+
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .info-item:hover {
+      background: rgba(212, 175, 55, 0.05);
+      transform: translateX(5px);
+    }
+
+    .info-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--gold), #f4e4a6);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .info-content h4 {
+      font-weight: 600;
+      color: var(--deep-blue);
+      margin-bottom: 0.3rem;
+    }
+
+    .info-content p {
+      color: #666;
+      font-size: 0.95rem;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      margin-bottom: 3rem;
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .faq-section h2 {
+      font-family: 'Lora', serif;
+      font-size: 2rem;
+      color: var(--deep-blue);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .faq-item {
+      margin-bottom: 1rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      padding: 1.5rem;
+      background: rgba(212, 175, 55, 0.05);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 500;
+      color: var(--deep-blue);
+      transition: all 0.3s ease;
+    }
+
+    .faq-question:hover {
+      background: rgba(212, 175, 55, 0.1);
+    }
+
+    .faq-question i {
+      color: var(--gold);
+      transition: transform 0.3s ease;
+    }
+
+    .faq-answer {
+      padding: 0 1.5rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      color: #666;
+    }
+
+    .faq-item.active .faq-question i {
+      transform: rotate(180deg);
+    }
+
+    .faq-item.active .faq-answer {
+      padding: 1.5rem;
+      max-height: 500px;
+    }
+
+    /* Response Message */
+    .response-message {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: white;
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      z-index: 1001;
+      transition: all 0.4s ease;
+      max-width: 400px;
+      width: 90%;
+    }
+
+    .response-message.active {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .response-icon {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .response-message h3 {
+      font-family: 'Lora', serif;
+      font-size: 1.8rem;
+      color: var(--deep-blue);
+      margin-bottom: 1rem;
+    }
+
+    .response-message p {
+      color: #666;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .close-response {
+      background: var(--gold);
+      color: white;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .close-response:hover {
+      background: var(--deep-blue);
+      transform: translateY(-2px);
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .contact-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .contact-header h1 {
+        font-size: 2.2rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 1rem 0.5rem;
+      }
+
+      .contact-container {
+        margin: 80px auto 1rem;
+      }
+
+      .contact-header h1 {
+        font-size: 1.8rem;
+      }
+
+      .contact-form,
+      .info-card,
+      .faq-section {
+        padding: 1.5rem;
+      }
+
+      .message-bubbles {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .message-bubble {
+        width: 100%;
+        max-width: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav id="mainNav">
+    <div class="logo">ETERNA</div>
+    <div class="nav-links">
+      <a href="home.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="dashboard.html" class="nav-link" style="display: none;">Dashboard</a>
+      <a href="Team.html" class="nav-link">Our Team</a>
+      <a href="help.html" class="nav-link active">Help</a>
+    </div>
+    <div class="nav-auth">
+      <a href="login.html"><i class="fas fa-sign-in-alt"></i> Log in</a>
+      <a href="signup.html"><i class="fas fa-user-plus"></i> Sign up</a>
+    </div>
+  </nav>
+
+  <!-- Contact Container -->
+  <div class="contact-container">
+    <!-- Header -->
+    <div class="contact-header">
+      <h1>💬 Get In Touch</h1>
+      <p>Ahhh need more clarification? Curious about more stuff? We're here for you! Whether you have questions, suggestions, or just want to chat about memories, we'd love to hear from you.</p>
+    </div>
+
+    <!-- Interactive Message -->
+    <div class="interactive-message">
+      <p>💭 Quick question: What brings you here today?</p>
+      <div class="message-bubbles">
+        <div class="message-bubble" onclick="fillForm('question', 'I have a question about...')">🤔 I have a question</div>
+        <div class="message-bubble" onclick="fillForm('help', 'I need help with...')">🆘 I need help</div>
+        <div class="message-bubble" onclick="fillForm('suggestion', 'I have a suggestion...')">💡 I have an idea</div>
+        <div class="message-bubble" onclick="fillForm('feedback', 'I wanted to share...')">🌟 Just sharing feedback</div>
+      </div>
+    </div>
+
+    <!-- Contact Content -->
+    <div class="contact-content">
+      <!-- Contact Form -->
+      <div class="contact-form">
+        <h2><i class="fas fa-paper-plane"></i> Send us a Message</h2>
+        <form id="contactForm">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" placeholder="What should we call you?" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="Where can we reach you?" required>
+          </div>
+
+          <div class="form-group">
+            <label for="subject">What's this about?</label>
+            <select id="subject" required>
+              <option value="">Choose a topic...</option>
+              <option value="general">General Question</option>
+              <option value="technical">Technical Support</option>
+              <option value="feature">Feature Request</option>
+              <option value="bug">Report a Bug</option>
+              <option value="partnership">Partnership</option>
+              <option value="other">Something Else</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Your Message</label>
+            <textarea id="message" placeholder="Tell us everything! We're all ears 👂" required></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            <i class="fas fa-paper-plane"></i>
+            Send Message
+          </button>
+        </form>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="contact-info">
+        <div class="info-card">
+          <h3><i class="fas fa-clock"></i> When to Expect a Reply</h3>
+          <div class="info-item">
+            <div class="info-icon">⏰</div>
+            <div class="info-content">
+              <h4>Response Time</h4>
+              <p>We typically reply within 24 hours. Sometimes faster if we're extra excited about your message! ⚡</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">📅</div>
+            <div class="info-content">
+              <h4>Working Hours</h4>
+              <p>Monday - Friday: 9AM - 6PM (Ghana, Accra)</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <h3><i class="fas fa-envelope"></i> Other Ways to Reach Us</h3>
+          <div class="info-item">
+            <div class="info-icon">📧</div>
+            <div class="info-content">
+              <h4>Email</h4>
+              <p>hello@eterna.com<br><small>For general inquiries</small></p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">🔧</div>
+            <div class="info-content">
+              <h4>Support</h4>
+              <p>support@eterna.com<br><small>Technical help & bugs</small></p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">💼</div>
+            <div class="info-content">
+              <h4>Partnerships</h4>
+              <p>partners@eterna.com<br><small>Working together</small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="faq-section">
+      <h2>❓ More frequently Asked Questions</h2>
+      <div class="faq-item">
+        <div class="faq-question">
+          How do I recover a deleted memory?
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          Don't worry! Deleted memories go to your "Archive" for 30 days before being permanently deleted. You can restore them anytime within that period from your Dashboard settings.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          Can I share memories with non-ETERNA users?
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          Absolutely! When you share a memory, we generate a special link that anyone can view for 7 days. They don't need an account to see your shared memories.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          Is there a limit to how many memories I can store?
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          Free accounts get 500 memories, while Premium users enjoy unlimited storage! Plus, we automatically optimize your photos to save space without losing quality.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          How do future messages work?
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          Future messages are like time capsules! You write them now, set a delivery date, and we'll send them to you (or someone else) on that special day in the future. Perfect for birthdays, anniversaries, or notes to your future self!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Response Message -->
+  <div class="overlay" id="overlay"></div>
+  <div class="response-message" id="responseMessage">
+    <div class="response-icon">🎉</div>
+    <h3>Message Sent!</h3>
+    <p>Thanks for reaching out! We've received your message and will get back to you soon. In the meantime, why not capture a new memory? 📸</p>
+    <button class="close-response" onclick="closeResponse()">Awesome, thanks!</button>
+  </div>
+
+  <script>
+    // Interactive message bubbles
+    function fillForm(type, placeholder) {
+      const messageField = document.getElementById('message');
+      messageField.placeholder = placeholder;
+      messageField.focus();
+      
+      // Set subject based on type
+      const subjectField = document.getElementById('subject');
+      const typeMap = {
+        'question': 'general',
+        'help': 'technical',
+        'suggestion': 'feature',
+        'feedback': 'general'
+      };
+      subjectField.value = typeMap[type] || 'general';
+    }
+
+    // FAQ functionality
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const item = question.parentElement;
+        item.classList.toggle('active');
+      });
+    });
+
+    // Form submission
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Show success message
+      document.getElementById('overlay').classList.add('active');
+      document.getElementById('responseMessage').classList.add('active');
+      
+      // Reset form
+      this.reset();
+    });
+
+    function closeResponse() {
+      document.getElementById('overlay').classList.remove('active');
+      document.getElementById('responseMessage').classList.remove('active');
+    }
+
+    // Close response when clicking overlay
+    document.getElementById('overlay').addEventListener('click', closeResponse);
+
+    // Add some fun animations
+    document.addEventListener('DOMContentLoaded', () => {
+      // Animate info items on scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.info-item, .faq-item').forEach(item => {
+        observer.observe(item);
+      });
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="../js_files/eterna_js.js"></script>
+</body>
+</html>

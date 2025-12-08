@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ETERNA — Where moments last forever.</title>
+  <link rel="icon" type="image/png" href="../Media/ETERNA2-removebg-preview.png">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css_files/eterna_.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+  <nav id="mainNav">
+    <div class="logo">ETERNA</div>
+    <div class="nav-links">
+      <a href="home.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <!--<a href="dashboard.html" class="nav-link">Dashboard</a>-->
+      <a href="Team.html" class="nav-link">Our Team</a>
+      <a href="help.html" class="nav-link">Help</a>
+    </div>
+    <div class="nav-auth">
+      <a href="login.html" class="nav-link active"><i class="fas fa-sign-in-alt"></i> Log in</a>
+      <a href="signup.html"><i class="fas fa-user-plus"></i> Sign up</a>
+    </div>
+  </nav>
+
+  <!-- Login Page -->
+  <section id="login" class="page active">
+    <div class="page-content auth-page">
+      <div class="illustration">🔐</div>
+      <h1>Welcome Back</h1>
+      <p>Log in to access your memories</p>
+      
+      <div class="card auth-card">
+        <form id="loginForm" onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label for="loginEmail"><i class="fas fa-envelope"></i> Email</label>
+            <input type="email" id="loginEmail" placeholder="you@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="loginPass"><i class="fas fa-lock"></i> Password</label>
+            <input type="password" id="loginPass" placeholder="••••••••" required>
+          </div>
+          <div class="form-options">
+            <label class="checkbox-label">
+              <input type="checkbox"> Remember me
+            </label>
+            <a href="#" class="link-gold">Forgot password?</a>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">
+            <i class="fas fa-door-open"></i> Log In
+          </button>
+        </form>
+        <div class="auth-toggle">
+          Don't have an account? <a href="signup.html">Sign up</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>ETERNA — Where moments last forever.</p>
+    <div class="footer-links">
+      <a href="about.html">About</a>
+      <a href="Team.html">Our Team</a>
+      <a href="help.html">Help</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+    </div>
+  </footer>
+
+  <script src="../js_files/eterna_js.js"></script>
+</body>
+</html>
