@@ -2,6 +2,11 @@
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 
+// Disable HTML error output
+error_reporting(E_ALL);
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+
 include_once "database.php";
 
 $capsuleId = $_POST['capsule_id'] ?? '';
@@ -20,11 +25,25 @@ if ($checkStmt->get_result()->num_rows === 0) {
     exit;
 }
 
+// Determine paths based on environment
+if ($_SERVER['HTTP_HOST'] === 'localhost' || strpos($_SERVER['HTTP_HOST'], '127.0.0.1') !== false) {
+    // Localhost
+    $uploadDir = __DIR__ . '/../uploads/capsules/' . $capsuleId . '/';
+    $webPath = '/uploads/capsules/' . $capsuleId . '/';
+} else {
+    // Production server
+    $uploadDir = __DIR__ . '/../uploads/capsules/' . $capsuleId . '/';
+    $webPath = '/~kevin.bigirimana/Web_Tech_Project_Eterna/uploads/capsules/' . $capsuleId . '/';
+}
+
 // Create upload directory if it doesn't exist
-$uploadDir = '../uploads/capsules/' . $capsuleId . '/';
-$webPath = '/uploads/capsules/' . $capsuleId . '/';
 if (!is_dir($uploadDir)) {
-    mkdir($uploadDir, 0777, true);
+    if (!mkdir($uploadDir, 0755, true)) {
+        error_log("Failed to create directory: $uploadDir - " . error_get_last()['message']);
+        echo json_encode(['success' => false, 'message' => 'Failed to create upload directory. Please check server permissions.']);
+        exit;
+    }
+    error_log("Successfully created directory: $uploadDir");
 }
 
 $uploadedFiles = [];
