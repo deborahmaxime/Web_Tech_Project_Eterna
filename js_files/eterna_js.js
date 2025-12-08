@@ -2285,32 +2285,49 @@ async function loadProfileData() {
     const user = result.user;
     
     // Update profile header
-    document.getElementById('profileFullName').textContent = `${user.first_name} ${user.last_name}`;
-    document.getElementById('profileEmail').textContent = user.email;
-    document.getElementById('memberSince').textContent = user.member_since;
-    document.getElementById('navUserName').textContent = user.first_name;
+    const profileFullName = document.getElementById('profileFullName');
+    const profileEmail = document.getElementById('profileEmail');
+    const memberSince = document.getElementById('memberSince');
+    const navUserName = document.getElementById('navUserName');
+    
+    if (profileFullName) profileFullName.textContent = `${user.first_name} ${user.last_name}`;
+    if (profileEmail) profileEmail.textContent = user.email;
+    if (memberSince) memberSince.textContent = user.member_since;
+    if (navUserName) navUserName.textContent = user.first_name;
     
     // Update profile picture
     const profilePic = document.getElementById('profilePicture');
-    if (user.profile_picture) {
-      profilePic.src = '../' + user.profile_picture;
-    } else {
-      profilePic.src = `https://ui-avatars.com/api/?name=${user.first_name}+${user.last_name}&size=200&background=d4af37&color=1c2a3a&bold=true`;
+    if (profilePic) {
+      if (user.profile_picture) {
+        profilePic.src = '../' + user.profile_picture;
+      } else {
+        profilePic.src = `https://ui-avatars.com/api/?name=${user.first_name}+${user.last_name}&size=200&background=d4af37&color=1c2a3a&bold=true`;
+      }
     }
     
     // Update stats
     if (user.stats) {
-      document.getElementById('totalMemories').textContent = user.stats.total_capsules || 0;
-      document.getElementById('sharedMemories').textContent = user.stats.shared_count || 0;
-      document.getElementById('futureMemories').textContent = user.stats.future_count || 0;
+      const totalMemories = document.getElementById('totalMemories');
+      const sharedMemories = document.getElementById('sharedMemories');
+      const futureMemories = document.getElementById('futureMemories');
+      
+      if (totalMemories) totalMemories.textContent = user.stats.total_capsules || 0;
+      if (sharedMemories) sharedMemories.textContent = user.stats.shared_count || 0;
+      if (futureMemories) futureMemories.textContent = user.stats.future_count || 0;
     }
     
     // Update form fields
-    document.getElementById('firstName').value = user.first_name || '';
-    document.getElementById('lastName').value = user.last_name || '';
-    document.getElementById('bio').value = user.bio || '';
-    document.getElementById('birthdate').value = user.birth_date || '';
-    document.getElementById('location').value = user.location || '';
+    const firstName = document.getElementById('firstName');
+    const lastName = document.getElementById('lastName');
+    const bio = document.getElementById('bio');
+    const birthdate = document.getElementById('birthdate');
+    const location = document.getElementById('location');
+    
+    if (firstName) firstName.value = user.first_name || '';
+    if (lastName) lastName.value = user.last_name || '';
+    if (bio) bio.value = user.bio || '';
+    if (birthdate) birthdate.value = user.birth_date || '';
+    if (location) location.value = user.location || '';
     
   } catch (error) {
     console.error('Load profile error:', error);
