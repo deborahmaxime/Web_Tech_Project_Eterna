@@ -25,6 +25,17 @@ if (!$env || !is_array($env)) {
     die(json_encode(['success' => false, 'message' => 'Failed to parse environment file']));
 }
 
+// Trim all values to remove whitespace
+$servername = trim($env['servername'] ?? 'localhost');
+$username = trim($env['username'] ?? 'root');
+$password = trim($env['password'] ?? '');
+$dbname = trim($env['dbname'] ?? 'eternaDb_');
+
+// Remove quotes if present (in case password is quoted in env file)
+$password = trim($password, '"\'');
+$username = trim($username, '"\'');
+$dbname = trim($dbname, '"\'');
+
 // Set CORS headers to allow requests from any origin (for development)
 $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '*';
 header('Access-Control-Allow-Origin: ' . $origin);
@@ -45,11 +56,6 @@ if (session_status() === PHP_SESSION_NONE) {
     ini_set('session.use_only_cookies', 1);
     session_start();
 }
-
-$servername = $env['servername'] ?? 'localhost';
-$username = $env['username'] ?? 'root';
-$password = $env['password'] ?? '';
-$dbname = $env['dbname'] ?? 'eternaDb_';
 
 error_log("Database config - host: $servername, user: $username, db: $dbname");
 
