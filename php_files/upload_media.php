@@ -51,18 +51,22 @@ $errors = [];
 
 // Check if files were uploaded
 if (!isset($_FILES['media']) || !is_array($_FILES['media']['name'])) {
+    error_log("No files in upload: " . json_encode($_FILES));
     echo json_encode(['success' => false, 'message' => 'No files uploaded']);
     exit;
 }
 
 // Get the count of uploaded files
 $fileCount = count($_FILES['media']['name']);
+error_log("Processing $fileCount file(s) for capsule $capsuleId");
 
 // Process each file
 for ($i = 0; $i < $fileCount; $i++) {
     // Skip if error
     if ($_FILES['media']['error'][$i] !== UPLOAD_ERR_OK) {
-        $errors[] = "Error uploading file " . ($i + 1) . ": " . $_FILES['media']['error'][$i];
+        $errorMsg = "Error uploading file " . ($i + 1) . ": " . $_FILES['media']['error'][$i];
+        error_log($errorMsg);
+        $errors[] = $errorMsg;
         continue;
     }
     
@@ -71,6 +75,8 @@ for ($i = 0; $i < $fileCount; $i++) {
     $uniqueFileName = uniqid() . '_' . time() . '_' . $i . '.' . $fileExtension;
     $filePath = $uploadDir . $uniqueFileName;
     $webFilePath = $webPath . $uniqueFileName;
+    
+    error_log("Attempting to upload: $fileName to $filePath");
     
     // Determine media type from MIME type
     $mimeType = $_FILES['media']['type'][$i];
@@ -86,6 +92,8 @@ for ($i = 0; $i < $fileCount; $i++) {
     
     // Move uploaded file
     if (move_uploaded_file($_FILES['media']['tmp_name'][$i], $filePath)) {
+        error_log("File successfully moved to: $filePath");
+        
         // Insert into database
         $stmt = $conn->prepare("
             INSERT INTO media 
@@ -105,6 +113,7 @@ for ($i = 0; $i < $fileCount; $i++) {
         );
         
         if ($stmt->execute()) {
+            error_log("Media record inserted to database: media_id=" . $conn->insert_id);
             $uploadedFiles[] = [
                 'media_id' => $conn->insert_id,
                 'file_name' => $fileName,
@@ -112,10 +121,14 @@ for ($i = 0; $i < $fileCount; $i++) {
                 'file_path' => $webFilePath
             ];
         } else {
-            $errors[] = "Database error for {$fileName}: " . $stmt->error;
+            $errorMsg = "Database insert failed: " . $stmt->error;
+            error_log($errorMsg);
+            $errors[] = $errorMsg;
         }
     } else {
-        $errors[] = "Failed to move {$fileName} to upload directory";
+        $errorMsg = "Failed to move uploaded file: " . $fileName . " - " . error_get_last()['message'];
+        error_log($errorMsg);
+        $errors[] = $errorMsg;
     }
 }
 
