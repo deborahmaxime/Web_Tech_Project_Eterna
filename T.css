@@ -1,0 +1,131 @@
+:root {
+      --beige: #f5f0e6;
+      --deep-blue: #1a2b3c;
+      --gold: #d4af37;
+      --light-gold: #f0e6c8;
+      --translucent: rgba(255, 255, 255, 0.15);
+      --blur-bg: rgba(255, 255, 255, 0.08);
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* This is the background image for the whole section */
+    .team-section {
+      background-image: url('Media/BG4.avif'); 
+      background-size: cover;      
+      background-position: center; 
+      background-attachment: fixed; 
+      padding: 80px 0;
+    }
+
+    .team-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 40px;
+      text-align: center;
+      background:transparent;
+      backdrop-filter: blur(1200px);
+      margin: 0 auto;
+      max-width: 1200px;
+      border-radius: 15px;
+      padding: 40px;
+    }
+
+    .member {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 250px;
+      transition: transform 0.3s ease;
+    }
+
+    .member:hover {
+      transform: translateY(-10px);
+    }
+
+    .member img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .member h3 {
+      margin-top: 15px;
+      font-size: 20px;
+      color: #333;
+    }
+
+    .member p {
+      margin-top: 5px;
+      font-size: 16px;
+      color: #555;
+    }
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1.2rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(12px);
+      background: var(--blur-bg);
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      z-index: 1000;
+    }
+
+    .logo {
+      font-family: 'Lora', serif;
+      font-weight: 600;
+      font-size: 1.8rem;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    .nav-links a {
+      color: var(--deep-blue);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+     footer {
+      background: url("Media/BG4.avif");
+      color: var(--beige);
+      text-align: center;
+      padding: 4.8rem;
+      font-family: 'Lora', serif;
+      font-size: 1rem;
+    }
+
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
+      margin: 0 0.10rem;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }

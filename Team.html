@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ETERNA — Where moments last forever.</title>
+  <link rel="icon" type="image/png" href="ETERNA2-removebg-preview.png">
+  <link rel="stylesheet" href="T.css">
+</head>
+<body>
+  <nav>
+    <div class="logo">ETERNA</div>
+    <div class="nav-links">
+      <a href="Eterna.html" onclick="showPage('home')">Home</a>
+      <a href="#" onclick="showPage('capsule')">My Capsule</a>
+      <a href="Team.html">Our Team </a>
+      <a href="About.html">About </a>
+      <a href="login.html">Log In</a>
+    </div>
+  </nav>
+
+  <section class="team-section">
+    <div class="team-container">
+      <div class="member">
+        <img src="https://static.wixstatic.com/media/642103_b1650310218c43c8ad63151bb7ed25a5~mv2.jpg" alt="Deborah Cholabomi Agossou">
+        <h3>Deborah Cholabomi Agossou</h3>
+        <p>Database Developer</p>
+      </div>
+
+      <div class="member">
+        <img src="https://static.wixstatic.com/media/642103_65f91d43d1f14748a45a640e2450cce8~mv2.jpg" alt="Kevin Bigirimana">
+        <h3>Kevin Bigirimana</h3>
+        <p>Back-end Developer</p>
+      </div>
+
+      <div class="member">
+        <img src="https://static.wixstatic.com/media/642103_48cbc4169ca34700a8afaa18c1b2d7a2~mv2.jpg" alt="Ramatou Salah Hassane">
+        <h3>Ramatou Salah Hassane</h3>
+        <p>UI/UX Designer</p>
+      </div>
+
+      <div class="member">
+        <img src="https://static.wixstatic.com/media/642103_102a864036964f8080c36f0250eac909~mv2.jpg" alt="Ousmane Boubacar Bako">
+        <h3>Ousmane Boubacar Bako</h3>
+        <p>Front-end Developer</p>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <p>ETERNA — Where moments last forever.</p>
+    <a href="About.html">About</a>
+    <a href="#">Contact</a>
+    <a href="#">Privacy Policy</a>
+  </footer>
+  <script>
+    function showPage(page) {
+      document.getElementById('home-page').style.display = page === 'home' ? 'flex' : 'none';
+      document.getElementById('capsule-page').style.display = page === 'capsule' ? 'block' : 'none';
+    }
+  </script>
+
+</body>
+</html>

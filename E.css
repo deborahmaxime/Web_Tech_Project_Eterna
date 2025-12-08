@@ -1,0 +1,302 @@
+:root {
+      --beige: #f5f0e6;
+      --deep-blue: #1a2b3c;
+      --gold: #d4af37;
+      --light-gold: #f0e6c8;
+      --translucent: rgba(255, 255, 255, 0.15);
+      --blur-bg: rgba(255, 255, 255, 0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--beige);
+      color: var(--deep-blue);
+      overflow-x: hidden;
+    }
+
+    /*Nav */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1.2rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(12px);
+      background: var(--blur-bg);
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      z-index: 1000;
+    }
+
+    .logo {
+      font-family: 'Lora', serif;
+      font-weight: 600;
+      font-size: 1.8rem;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    .nav-links a {
+      color: var(--deep-blue);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 2rem;
+      overflow: hidden;
+    }
+
+    .slideshow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      background-size: cover;
+      background-position: center;
+      transition: opacity 2s ease-in-out;
+    }
+
+    .slide.active {
+      opacity: 1;
+    }
+
+    .welcome-text {
+      font-family: 'Lora', serif;
+      font-size: 2.4rem;
+      max-width: 600px;
+      margin-bottom: 3rem;
+      line-height: 1.4;
+      color: var(--deep-blue);
+    }
+
+    .panels {
+      display: flex;
+      gap: 2.5rem;
+      width: 90%;
+      max-width: 1000px;
+    }
+
+    .panel {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      flex: 1;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .panel:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    }
+
+    .panel h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      color: var(--deep-blue);
+    }
+
+    .memory-preview {
+      height: 180px;
+      background: #e0d9c9;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--deep-blue);
+      font-style: italic;
+    }
+
+    .capsule-portal {
+      height: 200px;
+      background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: pulse 3s infinite;
+      cursor: pointer;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+      70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+    }
+
+    .btn {
+      background: var(--deep-blue);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 30px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background: var(--gold);
+      color: var(--deep-blue);
+    }
+
+    /* My Capsule Page*/
+    #capsule-page {
+      display: none;
+      padding: 6rem 5% 4rem;
+      background: var(--beige);
+    }
+
+    .capsule-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .capsule-header h2 {
+      font-family: 'Lora', serif;
+      font-size: 2.2rem;
+      color: var(--deep-blue);
+    }
+
+    .memories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .memory-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+      transition: transform 0.3s ease;
+    }
+
+    .memory-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .card-img {
+      height: 180px;
+      background: #e8e2d4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--deep-blue);
+    }
+
+    .card-content {
+      padding: 1.2rem;
+    }
+
+    .card-content p {
+      font-size: 0.95rem;
+      color: #555;
+      margin: 0.6rem 0;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 0.8rem;
+    }
+
+    .card-actions button {
+      background: none;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      color: var(--deep-blue);
+      transition: color 0.2s;
+    }
+
+    .card-actions button:hover {
+      color: var(--gold);
+    }
+
+    .floating-btn {
+      position: fixed;
+      bottom: 2.5rem;
+      right: 2.5rem;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: var(--deep-blue);
+      font-size: 1.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      cursor: pointer;
+      z-index: 900;
+    }
+
+    /* Footer */
+    footer {
+      background: url("Media/BG4.avif");
+      color: var(--beige);
+      text-align: center;
+      padding: 4.8rem;
+      font-family: 'Lora', serif;
+      font-size: 1rem;
+    }
+
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
+      margin: 0 0.8rem;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* this is for Responsiveness */
+    @media (max-width: 768px) {
+      .panels {
+        flex-direction: column;
+        align-items: center;
+      }
+      .welcome-text {
+        font-size: 1.8rem;
+      }
+    }
