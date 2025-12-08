@@ -26,15 +26,9 @@ if ($checkStmt->get_result()->num_rows === 0) {
 }
 
 // Determine paths based on environment
-if ($_SERVER['HTTP_HOST'] === 'localhost' || strpos($_SERVER['HTTP_HOST'], '127.0.0.1') !== false) {
-    // Localhost
-    $uploadDir = __DIR__ . '/../uploads/capsules/' . $capsuleId . '/';
-    $webPath = '/uploads/capsules/' . $capsuleId . '/';
-} else {
-    // Production server
-    $uploadDir = __DIR__ . '/../uploads/capsules/' . $capsuleId . '/';
-    $webPath = '/~kevin.bigirimana/Web_Tech_Project_Eterna/uploads/capsules/' . $capsuleId . '/';
-}
+$uploadDir = __DIR__ . '/../uploads/capsules/' . $capsuleId . '/';
+// Store relative path in database - JavaScript will handle environment-specific prefixes
+$webPath = 'uploads/capsules/' . $capsuleId . '/';
 
 error_log("Upload directory: $uploadDir");
 error_log("Parent directory writable: " . (is_writable(__DIR__ . '/../uploads/capsules/') ? 'yes' : 'no'));

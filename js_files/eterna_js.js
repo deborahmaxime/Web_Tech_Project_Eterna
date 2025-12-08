@@ -2,6 +2,32 @@
 
 // ==================== GLOBAL UTILITIES ====================
 /**
+ * Constructs the proper media path based on environment and file path
+ */
+function getMediaPath(filePath) {
+  if (!filePath) return '';
+  
+  // If already a full URL or starts with http, return as is
+  if (filePath.startsWith('http://') || filePath.startsWith('https://')) {
+    return filePath;
+  }
+  
+  // If path starts with ../, it's already relative from html_files, return as is
+  if (filePath.startsWith('../')) {
+    return filePath;
+  }
+  
+  // If path starts with /, it's an absolute server path, return as is
+  if (filePath.startsWith('/')) {
+    return filePath;
+  }
+  
+  // Otherwise, it's a relative path from project root (e.g., "uploads/capsules/7/file.jpg")
+  // Add ../ to make it relative from html_files directory
+  return '../' + filePath;
+}
+
+/**
  * Closes the edit modal with a fade-out animation
  */
 function closeEditModal() {
@@ -675,12 +701,7 @@ function createMemoryCard(capsule) {
   } else if (capsule.media && capsule.media.length > 0) {
     // Get the last media item (most recently uploaded)
     const lastMedia = capsule.media[capsule.media.length - 1];
-    
-    // Fix the file path if it doesn't start with ../ or /
-    let mediaPath = lastMedia.file_path;
-    if (!mediaPath.startsWith('../') && !mediaPath.startsWith('http') && !mediaPath.startsWith('/')) {
-      mediaPath = '../' + mediaPath;
-    }
+    const mediaPath = getMediaPath(lastMedia.file_path);
     
     if (lastMedia.media_type === 'image') {
       cardImageContent = `<img src="${mediaPath}" alt="${capsule.title}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.parentElement.innerHTML='<i class=\\'fas fa-image card-icon\\'></i>';">`;
@@ -894,17 +915,7 @@ async function openEditModal(capsuleId) {
                 <!-- Existing Media -->
                 <div id="existingMediaContainer" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
                   ${capsule.media && capsule.media.length > 0 ? capsule.media.map(media => {
-                    // Fix the file path - remove any leading '../' and ensure proper path
-                    let displayPath = media.file_path;
-                    
-                    // If path starts with 'uploads/', prepend '../'
-                    if (displayPath.startsWith('uploads/')) {
-                      displayPath = '../' + displayPath;
-                    }
-                    // If path already has '../uploads/' or is absolute path starting with '/', use as is
-                    else if (!displayPath.startsWith('../') && !displayPath.startsWith('/')) {
-                      displayPath = '../' + displayPath;
-                    }
+                    const displayPath = getMediaPath(media.file_path);
                     
                     console.log('Media path:', displayPath); // For debugging
                     
@@ -1551,10 +1562,7 @@ async function loadLatestMemory() {
       let previewContent = '';
       if (latestCapsule.media && latestCapsule.media.length > 0) {
         const lastMedia = latestCapsule.media[latestCapsule.media.length - 1];
-        let mediaPath = lastMedia.file_path;
-        if (!mediaPath.startsWith('../') && !mediaPath.startsWith('http') && !mediaPath.startsWith('/')) {
-          mediaPath = '../' + mediaPath;
-        }
+        const mediaPath = getMediaPath(lastMedia.file_path);
         
         console.log('Media path:', mediaPath); // Debug log
         
@@ -2035,12 +2043,7 @@ function createCapsuleDetailModal(capsule) {
             
             <div class="media-carousel" id="mediaCarousel">
               ${capsule.media.map((media, index) => {
-                let displayPath = media.file_path;
-                if (displayPath.startsWith('uploads/')) {
-                  displayPath = '../' + displayPath;
-                } else if (!displayPath.startsWith('../') && !displayPath.startsWith('/')) {
-                  displayPath = '../' + displayPath;
-                }
+                const displayPath = getMediaPath(media.file_path);
                 
                 return `
                   <div class="media-slide" data-slide-index="${index}">
