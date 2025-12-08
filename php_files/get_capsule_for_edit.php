@@ -36,7 +36,6 @@ try {
             date_of_memory, 
             location_name, 
             capsule_type, 
-            created_at,
             open_date,
             status
         FROM capsules 
