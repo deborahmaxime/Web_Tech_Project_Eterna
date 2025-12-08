@@ -469,6 +469,7 @@ async function handleCreateMemory(event) {
   
   try {
     // First, create the capsule
+    console.log('Sending capsule creation request...');
     const response = await fetch('../php_files/create_capsule.php', {
       method: 'POST',
       headers: {
@@ -485,7 +486,14 @@ async function handleCreateMemory(event) {
       })
     });
     
+    console.log('Response received:', response.status, response.statusText);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
     const result = await response.json();
+    console.log('Result:', result);
     
     if (result.success) {
       const capsuleId = result.capsule_id;
